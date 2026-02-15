@@ -53,15 +53,18 @@ function removeBackground(img) {
             Math.pow(255 - b, 2)
         );
 
-        // Also check for light gray/off-white (low saturation, high brightness)
-        let maxVal = Math.max(r, g, b);
-        let minVal = Math.min(r, g, b);
-        let saturation = (maxVal === 0) ? 0 : (maxVal - minVal) / maxVal;
+        // Check for grayscale/neutral colors (checkerboard pattern)
+        let diff = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
 
-        // If it's close to white (distance < 100)
-        // OR if it's a gray pixel (low saturation) that is not too dark (brightness > 100)
-        if (dist < 100 || (saturation < 0.1 && maxVal > 100)) {
-            img.pixels[i + 3] = 0; // Transparent
+        // Target specifically the checkerboard:
+        // 1. Strict grayscale (diff < 10) - checkerboards are usually perfect gray
+        // 2. Brightness > 50 - covers the dark gray squares (~89) but avoids pure black
+        if (diff < 10 && r > 50 && g > 50 && b > 50) {
+            img.pixels[i + 3] = 0;
+        }
+        // Also catch standard white/light backgrounds
+        else if (dist < 120) {
+            img.pixels[i + 3] = 0;
         }
     }
 }
