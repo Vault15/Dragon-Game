@@ -181,12 +181,24 @@ class Lizard {
     }
 
     update() {
+        // Keyboard controls
         if (keyIsDown(LEFT_ARROW)) {
             this.pos.x -= this.speed;
         }
         if (keyIsDown(RIGHT_ARROW)) {
             this.pos.x += this.speed;
         }
+
+        // Touch/Mouse controls (Mobile)
+        // If screen is touched on the left half, move left. Right half, move right.
+        if (mouseIsPressed && !gameOver) {
+            if (mouseX < width / 2) {
+                this.pos.x -= this.speed;
+            } else {
+                this.pos.x += this.speed;
+            }
+        }
+
         this.pos.x = constrain(this.pos.x, 0, width - this.w);
     }
 
