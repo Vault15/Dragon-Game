@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#fcd34d">
   <title>Feed the Dragon</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
@@ -17,8 +20,16 @@
   }
 }
 </script>
+<style>
+  /* Prevent browser gestures like pull-to-refresh and back/forward swipes */
+  body {
+    touch-action: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+</style>
 </head>
-<body class="bg-amber-50 overflow-hidden m-0 p-0">
+<body class="bg-amber-50 overflow-hidden m-0 p-0 fixed inset-0">
   <div id="root"></div>
 </body>
 </html>
