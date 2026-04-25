@@ -20,3 +20,7 @@ body {
 #controls {
     margin-top: 10px;
 }
+
+canvas {
+    touch-action: none; /* Prevents scrolling when touching the game on mobile */
+}
